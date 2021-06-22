@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://teacherEdit.caption"
+        focusComponent="form"
+        messagesPack="com.company.sms.web.screens.teacher">
+    <data>
+        <instance id="teacherDc"
+                  class="com.company.sms.entity.Teacher">
+            <view extends="_minimal">
+                <property name="name"/>
+                <property name="qualification"/>
+                <property name="age"/>
+                <property name="department"/>
+                <property name="assistants">
+                    <property name="name"/>
+                    <property name="grade"/>
+                    <property name="age"/>
+                </property>
+            </view>
+            <loader/>
+            <collection id="assistantsDc" property="assistants"/>
+        </instance>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="teacherDc">
+            <column width="350px">
+                <textField id="nameField" property="name"/>
+                <textField id="qualificationField" property="qualification"/>
+                <textField id="ageField" property="age"/>
+                <textField id="departmentField" property="department"/>
+            </column>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+            <button id="closeBtn" action="windowClose"/>
+        </hbox>
+        <groupTable id="assistantsTable"
+                    width="100%"
+                    dataContainer="assistantsDc">
+            <actions>
+                <action id="add" type="add"/>
+                <action id="remove" type="exclude"/>
+            </actions>
+            <columns>
+                <column id="name"/>
+                <column id="grade"/>
+                <column id="age"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="add" action="assistantsTable.add"/>
+                <button id="remove" action="assistantsTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+    </layout>
+</window>
